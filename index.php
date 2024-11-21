@@ -25,10 +25,6 @@ $events = getAllEvents($pdo);
             margin-top: 5%;
         }
 
-        tr:hover {
-            background-color: #f9f9f9;
-        }
-
         th,
         td {
             border: 1px solid #ddd;
@@ -39,11 +35,34 @@ $events = getAllEvents($pdo);
         th {
             background-color: #f4f4f4;
         }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        nav {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            margin: 0 10px;
+            color: #007bff;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
 <body>
     <h1>Sports Event Calendar</h1>
+    <nav>
+        <a href="add_event.php">Add Event</a> |
+        <a href="filter.php?sport=Football">Filter by Football</a>
+    </nav>
     <table>
         <thead>
             <tr>
@@ -54,14 +73,20 @@ $events = getAllEvents($pdo);
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($events as $event): ?>
+            <?php if (!empty($events)): ?>
+                <?php foreach ($events as $event): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($event['description']) ?></td>
+                        <td><?= htmlspecialchars($event['sport_name']) ?></td>
+                        <td><?= htmlspecialchars($event['venue_name']) ?></td>
+                        <td><?= htmlspecialchars((new DateTime($event['date_time']))->format('d-m-Y H:i')) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
                 <tr>
-                    <td><?= htmlspecialchars($event['description']) ?></td>
-                    <td><?= htmlspecialchars($event['sport_name']) ?></td>
-                    <td><?= htmlspecialchars($event['venue_name']) ?></td>
-                    <td><?= htmlspecialchars($event['date_time']) ?></td>
+                    <td colspan="4" style="text-align:center;">No events available at the moment.</td>
                 </tr>
-            <?php endforeach; ?>
+            <?php endif; ?>
         </tbody>
     </table>
 </body>
