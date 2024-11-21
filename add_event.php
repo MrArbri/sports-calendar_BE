@@ -30,6 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <h1>Add New Event</h1>
 
+    <a href="index.php"> Back to All Events</a>
+
     <form method="POST" action="">
 
         <label for="sport_id">Sport ID: </label>

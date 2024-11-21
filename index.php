@@ -61,7 +61,9 @@ $events = getAllEvents($pdo);
     <h1>Sports Event Calendar</h1>
     <nav>
         <a href="add_event.php">Add Event</a> |
-        <a href="filter.php?sport=Football">Filter by Football</a>
+        <a href="filter.php?sport=Football">Filter by Football</a>|
+        <a href="filter.php?sport=Basketball">Filter by Basketball</a> |
+        <a href="filter.php?sport=Ice Hockey">Filter by Ice Hockey</a>
     </nav>
     <table>
         <thead>
