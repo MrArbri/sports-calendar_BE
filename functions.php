@@ -22,7 +22,7 @@ function getAllEvents($pdo)
 function addEvent($pdo, $sport_id, $description, $venue_id, $date_time)
 {
     $query = "
-    INSERT IN TO Events (sport_id, description, venue_id, date_time)
+    INSERT INTO Events (sport_id, description, venue_id, date_time)
     VALUES (:sport_id, :description, :venue_id, :date_time)";
 
     $stmt = $pdo->prepare($query);
