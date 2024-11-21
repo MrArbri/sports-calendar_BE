@@ -15,10 +15,18 @@ $events = getAllEvents($pdo);
             font-family: Arial, sans-serif;
         }
 
+        h1 {
+            text-align: center;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20%;
+            margin-top: 5%;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
         }
 
         th,
