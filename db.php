@@ -1,7 +1,7 @@
 <?php
 // db.php database connection 
-$host = 'localhost';
-$dbname = 'sports-event-calendar';
+$host = '127.0.0.1';
+$dbname = 'sports_event_calendar';
 $username = 'root';
 $password = '';
 
