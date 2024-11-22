@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <h1>Add New Event</h1>
 
-    <a href="index.php"> Back to All Events</a>
+    <a href="index.php"> Back to All Events</a><br><br>
 
     <form method="POST" action="">
 

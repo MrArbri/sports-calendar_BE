@@ -19,8 +19,13 @@ $events = getAllEvents($pdo);
             text-align: center;
         }
 
+        #table {
+            display: flex;
+            justify-content: center;
+        }
+
         table {
-            width: 100%;
+            width: 95%;
             border-collapse: collapse;
             margin-top: 5%;
         }
@@ -58,39 +63,45 @@ $events = getAllEvents($pdo);
 </head>
 
 <body>
+
     <h1>Sports Event Calendar</h1>
+
     <nav>
         <a href="add_event.php">Add Event</a> |
         <a href="filter.php?sport=Football">Filter by Football</a>|
         <a href="filter.php?sport=Basketball">Filter by Basketball</a> |
         <a href="filter.php?sport=Ice Hockey">Filter by Ice Hockey</a>
     </nav>
-    <table>
-        <thead>
-            <tr>
-                <th>Description</th>
-                <th>Sport</th>
-                <th>Venue</th>
-                <th>Date & Time</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if (!empty($events)): ?>
-                <?php foreach ($events as $event): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($event['description']) ?></td>
-                        <td><?= htmlspecialchars($event['sport_name']) ?></td>
-                        <td><?= htmlspecialchars($event['venue_name']) ?></td>
-                        <td><?= htmlspecialchars((new DateTime($event['date_time']))->format('d-m-Y H:i')) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
+
+    <div id="table">
+        <table>
+            <thead>
                 <tr>
-                    <td colspan="4" style="text-align:center;">No events available at the moment.</td>
+                    <th>Description</th>
+                    <th>Sport</th>
+                    <th>Venue</th>
+                    <th>Date & Time</th>
                 </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php if (!empty($events)): ?>
+                    <?php foreach ($events as $event): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($event['description']) ?></td>
+                            <td><?= htmlspecialchars($event['sport_name']) ?></td>
+                            <td><?= htmlspecialchars($event['venue_name']) ?></td>
+                            <td><?= htmlspecialchars((new DateTime($event['date_time']))->format('d-m-Y H:i')) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="4" style="text-align:center;">No events available at the moment.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+
 </body>
 
 </html>
