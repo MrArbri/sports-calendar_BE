@@ -91,21 +91,6 @@ function getEventsBySport($pdo, $sport_name)
         a:hover {
             text-decoration: underline;
         }
-
-        nav {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        nav a {
-            text-decoration: none;
-            margin: 0 10px;
-            color: #007bff;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 
@@ -139,7 +124,7 @@ function getEventsBySport($pdo, $sport_name)
                             <td><?= htmlspecialchars($event['description']) ?></td>
                             <td><?= htmlspecialchars($event['sport_name']) ?></td>
                             <td><?= htmlspecialchars($event['venue_name']) ?></td>
-                            <td><?= htmlspecialchars((new Datetime($event['date_time']))->format('d-m-Y H:i')) ?></td>
+                            <td><?= htmlspecialchars((new DateTime($event['date_time']))->format('d-m-Y H:i')) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
