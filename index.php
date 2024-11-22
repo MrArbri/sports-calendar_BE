@@ -13,6 +13,9 @@ $events = getAllEvents($pdo);
     <style>
         body {
             font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px;
         }
 
         h1 {
