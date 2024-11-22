@@ -1,6 +1,41 @@
 <?php
 require 'functions.php';
-$events = getAllEvents($pdo);
+
+// Get available sports and venues
+$sports = getAllSports($pdo);
+$venues = getAllVenues($pdo);
+
+// Get the sport and venue from the URL query parameter 
+$sport_name = isset($_GET['sport']) ? $_GET['sport'] : '';
+$venue_id = isset($_GET['venue']) ? $_GET['venue'] : '';
+
+// Get filtered events or all events if no filter is applied
+$events = getFilteredEvents($pdo, $sport_name, $venue_id);
+
+function getFilteredEvents($pdo, $sport_name, $venue_id)
+{
+    $query = "
+    SELECT
+        e.id AS event_id,
+        e.description,
+        e.date_time,
+        s.name AS sport_name,
+        v.name AS venue_name
+    FROM Events e
+    JOIN Sports s ON e.sport_id = s.id
+    LEFT JOIN Venues v ON e.venue_id = v.id
+    WHERE (:sport_name = '' OR s.name = :sport_name)
+    AND (:venue_id = '' OR v.id = :venue_id)
+    ORDER BY e.date_time ASC";
+
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([
+        ':sport_name' => $sport_name,
+        ':venue_id' => $venue_id,
+    ]);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +55,45 @@ $events = getAllEvents($pdo);
 
         h1 {
             text-align: center;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            gap: 10px;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        select {
+            padding: 5px 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 5px 15px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
         }
 
         #table {
@@ -69,12 +143,29 @@ $events = getAllEvents($pdo);
 
     <h1>Sports Event Calendar</h1>
 
-    <nav>
-        <a href="add_event.php">Add Event</a> |
-        <a href="filter.php?sport=Football">Filter by Football</a>|
-        <a href="filter.php?sport=Basketball">Filter by Basketball</a> |
-        <a href="filter.php?sport=Ice Hockey">Filter by Ice Hockey</a>
-    </nav>
+    <form method="GET" action="index.php">
+        <label for="sport">Filter by Sport:</label>
+        <select id="sport" name="sport">
+            <option value="">-- All Sports --</option>
+            <?php foreach ($sports as $sport): ?>
+                <option value="<?= htmlspecialchars($sport['name']) ?>">
+                    <?= htmlspecialchars($sport['name']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+
+        <label for="venue">Filter by Venue:</label>
+        <select id="venue" name="venue">
+            <option value="">-- All Venues --</option>
+            <?php foreach ($venues as $venue): ?>
+                <option value="<?= htmlspecialchars($venue['id']) ?>">
+                    <?= htmlspecialchars($venue['name']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+
+        <button type="submit">Filter</button>
+    </form>
 
     <div id="table">
         <table>

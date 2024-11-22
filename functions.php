@@ -19,6 +19,20 @@ function getAllEvents($pdo)
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getAllSports($pdo)
+{
+    $query = "SELECT id, name FROM Sports ORDER BY name ASC";
+    $stmt = $pdo->query($query);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getAllVenues($pdo)
+{
+    $query = "SELECT id, name FROM Venues ORDER BY name ASC";
+    $stmt = $pdo->query($query);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 function addEvent($pdo, $sport_id, $description, $venue_id, $date_time)
 {
     $query = "
