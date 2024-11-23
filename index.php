@@ -148,7 +148,7 @@ function getFilteredEvents($pdo, $sport_name, $venue_id)
         <select id="sport" name="sport">
             <option value="">-- All Sports --</option>
             <?php foreach ($sports as $sport): ?>
-                <option value="<?= htmlspecialchars($sport['name']) ?>">
+                <option value="<?= htmlspecialchars($sport['name']) ?>" <?= $sport['name'] === $sport_name ? 'selected' : '' ?>>
                     <?= htmlspecialchars($sport['name']) ?>
                 </option>
             <?php endforeach; ?>
@@ -158,7 +158,7 @@ function getFilteredEvents($pdo, $sport_name, $venue_id)
         <select id="venue" name="venue">
             <option value="">-- All Venues --</option>
             <?php foreach ($venues as $venue): ?>
-                <option value="<?= htmlspecialchars($venue['id']) ?>">
+                <option value="<?= htmlspecialchars($venue['id']) ?>" <?= $venue['id'] == $venue_id ? 'selected' : '' ?>>
                     <?= htmlspecialchars($venue['name']) ?>
                 </option>
             <?php endforeach; ?>
