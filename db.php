@@ -1,5 +1,5 @@
 <?php
-// db.php database connection 
+// Database connection 
 $host = '127.0.0.1';
 $dbname = 'sports_event_calendar';
 $username = 'root';
