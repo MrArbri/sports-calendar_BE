@@ -8,12 +8,26 @@ $venues = getAllVenues($pdo);
 // Check if the form has been submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sport_id = $_POST['sport_id'];
-    $description = $_POST['description'];
+    $team1_name = trim($_POST['team1']);
+    $team2_name = trim($_POST['team2']);
     $venue_id = $_POST['venue_id'];
     $date_time = $_POST['date_time'];
 
+    // Check or create Team 1
+    $team1_id = getOrCreateTeam($pdo, $team1_name);
+
+    // Check or create Team 2
+    $team2_id = getOrCreateTeam($pdo, $team2_name);
+
+    // Create a description for the event
+    $description = $team1_name . ' - vs - ' . $team2_name;
+
     // Add the event to the database 
-    addEvent($pdo, $sport_id, $description, $venue_id, $date_time);
+    $event_id = addEvent($pdo, $sport_id, $description, $venue_id, $date_time);
+
+    // Link the teams to the event
+    linkTeamToEvent($pdo, $event_id, $team1_id);
+    linkTeamToEvent($pdo, $event_id, $team2_id);
 
     // Redirect back to the main page with a success message 
     header('Location: index.php?success=1');
@@ -70,6 +84,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
+        /* Wrapper for team fields */
+        .team-fields {
+            display: flex;
+            gap: 20px;
+            /* Space between the fields */
+            flex-wrap: wrap;
+            /* Allows wrapping on smaller screens */
+        }
+
+        .team-field {
+            flex: 1;
+            /* Ensures both fields take up equal width */
+            min-width: 200px;
+            /* Ensures a minimum width for each field */
+        }
+
         label {
             display: block;
             font-weight: bold;
@@ -119,6 +149,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 padding: 10px;
             }
 
+            .team-fields {
+                flex-direction: column;
+                /* Stack the fields */
+                gap: 10px;
+                /* Reduce space between fields */
+            }
+
             input {
                 font-size: 14px;
             }
@@ -148,8 +185,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endforeach; ?>
             </select>
 
-            <label for="description">Description: </label>
-            <input type="text" name="description" id="description" placeholder="Enter event description" required>
+            <div class="team-fields">
+                <div class="team-field">
+                    <label for="team1">Team 1: </label>
+                    <input type="text" name="team1" id="team1" placeholder="Enter Team 1 Name" required>
+                </div>
+                <div class="team-field">
+                    <label for="team2">Team 2: </label>
+                    <input type="text" name="team2" id="team2" placeholder="Enter Team 2 Name" required>
+                </div>
+            </div>
         </fieldset>
 
         <fieldset style="margin: 20px 0">
