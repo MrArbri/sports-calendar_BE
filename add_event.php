@@ -52,6 +52,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin: 0;
         }
 
+        nav {
+            text-align: start;
+            padding: 10px;
+            background-color: green;
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            padding: 10px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+
         .main-content {
             max-width: 600px;
             margin: 0 auto;
@@ -67,23 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             color: #333;
         }
 
-        a {
-            display: inline-block;
-            margin-bottom: 20px;
-            text-decoration: none;
-            padding: 5px;
-            font-size: 12px;
-            color: #fff;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
 
-        a:hover {
-            background-color: #0056b3;
-        }
 
         form {
             background-color: #fff;
@@ -156,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             width: auto;
             text-align: center;
             padding: 10px;
-            background-color: #393939;
+            background-color: #212121;
             color: #fff;
             border-top: 1px solid #ddd;
             font-size: 14px;
@@ -164,9 +173,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
 
             .team-fields {
                 flex-direction: column;
@@ -189,9 +195,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 
+    <nav>
+        <a href="index.php">⇦ Back to All Events</a>
+    </nav>
+
     <div class="main-content">
         <h1>Add New Event</h1>
-        <a href="index.php">⇦ Back to All Events</a>
 
         <form method="POST" action="">
             <fieldset>

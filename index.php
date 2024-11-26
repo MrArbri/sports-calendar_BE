@@ -61,6 +61,31 @@ function getFilteredEvents($pdo, $sport_name, $venue_id)
             margin: 0 auto;
         }
 
+        nav {
+            text-align: center;
+            padding: 10px;
+            background-color: green;
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        nav a {
+            display: inline-block;
+            text-decoration: none;
+            padding: 10px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #0056b3;
+        }
+
         h1 {
             text-align: center;
         }
@@ -132,29 +157,12 @@ function getFilteredEvents($pdo, $sport_name, $venue_id)
             background-color: #f9f9f9;
         }
 
-        nav {
-            text-align: center;
-            margin-bottom: 25px;
-        }
 
-        nav a {
-            text-decoration: none;
-            border-radius: 5px;
-            margin: 0 10px;
-            padding: 5px 15px;
-            font-size: 16px;
-            color: #fff;
-            background-color: #007bff;
-        }
-
-        nav a:hover {
-            background-color: #0056b3;
-        }
 
         .footer {
             text-align: center;
             padding: 10px;
-            background-color: #393939;
+            background-color: #212121;
             color: #fff;
             border-top: 1px solid #ddd;
             font-size: 14px;
@@ -215,6 +223,10 @@ function getFilteredEvents($pdo, $sport_name, $venue_id)
 
 <body>
 
+    <nav>
+        <a href="add_event.php">Add Event</a>
+    </nav>
+
     <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
 
         <div id="success-message" style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 20px; border: 1px solid #c3e6cb; border-radius: 5px;">
@@ -240,12 +252,7 @@ function getFilteredEvents($pdo, $sport_name, $venue_id)
 
     <?php endif; ?>
 
-
     <h1>Sports Event Calendar</h1>
-
-    <nav>
-        <a href="add_event.php">Add Event</a>
-    </nav>
 
     <form method="GET" action="index.php">
         <label for="sport">Filter by Sport:</label>
