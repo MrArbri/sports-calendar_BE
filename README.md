@@ -17,6 +17,12 @@ You can view the ERD (Entity Relationship Diagram) for the database schema in th
 
 [Download ERD PDF](./ERD.pdf)
 
+## Database Setup
+
+To set up the database, download the SQL file below and import it into your local database:
+
+[Download sports_event_calendar.sql](./sports_event_calendar.sql)
+
 ## Setup and Running the Application
 
 ### Prerequisites
