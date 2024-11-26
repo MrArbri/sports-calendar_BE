@@ -45,12 +45,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .main-content {
             max-width: 600px;
-            margin: 20px auto;
+            margin: 0 auto;
             padding: 20px;
             border: 1px solid #ddd;
             border-radius: 8px;
+            background-color: #f9f9f9;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
@@ -144,6 +152,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background-color: #0056b3;
         }
 
+        footer {
+            width: auto;
+            text-align: center;
+            padding: 10px;
+            background-color: #393939;
+            color: #fff;
+            border-top: 1px solid #ddd;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
         @media (max-width: 600px) {
             body {
                 padding: 10px;
@@ -170,49 +189,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 
-    <h1>Add New Event</h1>
+    <div class="main-content">
+        <h1>Add New Event</h1>
+        <a href="index.php">⇦ Back to All Events</a>
 
-    <a href="index.php">⇦ Back to All Events</a>
+        <form method="POST" action="">
+            <fieldset>
+                <legend>Event Details</legend>
+                <label for="sport_id">Select Sport:</label>
+                <select id="sport_id" name="sport_id" required>
+                    <option value="" disabled selected>-- Choose a Sport --</option>
+                    <?php foreach ($sports as $sport): ?>
+                        <option value="<?= htmlspecialchars($sport['id']) ?>"><?= htmlspecialchars($sport['name']) ?></option>
+                    <?php endforeach; ?>
+                </select>
 
-    <form method="POST" action="">
-        <fieldset>
-            <legend>Event Details</legend>
-            <label for="sport_id">Select Sport:</label>
-            <select id="sport_id" name="sport_id" required>
-                <option value="" disabled selected>-- Choose a Sport --</option>
-                <?php foreach ($sports as $sport): ?>
-                    <option value="<?= htmlspecialchars($sport['id']) ?>"><?= htmlspecialchars($sport['name']) ?></option>
-                <?php endforeach; ?>
-            </select>
-
-            <div class="team-fields">
-                <div class="team-field">
-                    <label for="team1">Team 1: </label>
-                    <input type="text" name="team1" id="team1" placeholder="Enter Team 1 Name" required>
+                <div class="team-fields">
+                    <div class="team-field">
+                        <label for="team1">Team 1: </label>
+                        <input type="text" name="team1" id="team1" placeholder="Enter Team 1 Name" required>
+                    </div>
+                    <div class="team-field">
+                        <label for="team2">Team 2: </label>
+                        <input type="text" name="team2" id="team2" placeholder="Enter Team 2 Name" required>
+                    </div>
                 </div>
-                <div class="team-field">
-                    <label for="team2">Team 2: </label>
-                    <input type="text" name="team2" id="team2" placeholder="Enter Team 2 Name" required>
-                </div>
-            </div>
-        </fieldset>
+            </fieldset>
 
-        <fieldset style="margin: 20px 0">
-            <legend>Location and Time</legend>
-            <label for="venue_id">Select Venue: </label>
-            <select id="venue_id" name="venue_id" required>
-                <option value="" disabled selected>-- Choose a Venue --</option>
-                <?php foreach ($venues as $venue): ?>
-                    <option value="<?= htmlspecialchars($venue['id']) ?>"><?= htmlspecialchars($venue['name']) ?></option>
-                <?php endforeach; ?>
-            </select>
+            <fieldset style="margin: 20px 0">
+                <legend>Location and Time</legend>
+                <label for="venue_id">Select Venue: </label>
+                <select id="venue_id" name="venue_id" required>
+                    <option value="" disabled selected>-- Choose a Venue --</option>
+                    <?php foreach ($venues as $venue): ?>
+                        <option value="<?= htmlspecialchars($venue['id']) ?>"><?= htmlspecialchars($venue['name']) ?></option>
+                    <?php endforeach; ?>
+                </select>
 
-            <label for="date_time">Date & Time: </label>
-            <input type="datetime-local" name="date_time" id="date_time" required>
-        </fieldset>
+                <label for="date_time">Date & Time: </label>
+                <input type="datetime-local" name="date_time" id="date_time" required>
+            </fieldset>
 
-        <button type="submit">Add New Event</button>
-    </form>
+            <button type="submit">Add New Event</button>
+        </form>
+    </div> <!-- End of .main-content -->
+
+    <footer>
+        <p>&copy; <?= date('Y'); ?> Arbër Islamaj. All rights reserved.</p>
+    </footer>
 
 </body>
 

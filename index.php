@@ -46,11 +46,19 @@ function getFilteredEvents($pdo, $sport_name, $venue_id)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sports Event Calendar</title>
     <style>
+        html,
         body {
+            height: 100%;
+            margin: 0;
             font-family: Arial, sans-serif;
-            max-width: 1200px;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            max-width: auto;
             margin: 0 auto;
-            padding: 10px;
         }
 
         h1 {
@@ -59,9 +67,11 @@ function getFilteredEvents($pdo, $sport_name, $venue_id)
 
         form {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            margin: 20px 0;
+            width: 60%;
+            margin: 20px auto;
             gap: 10px;
             padding: 10px;
             background-color: #f4f4f4;
@@ -141,11 +151,21 @@ function getFilteredEvents($pdo, $sport_name, $venue_id)
             background-color: #0056b3;
         }
 
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #393939;
+            color: #fff;
+            border-top: 1px solid #ddd;
+            font-size: 14px;
+            margin-top: auto;
+        }
+
         /* Responsive Design */
-        @media (max-width: 768px) {
+        @media (max-width: 1020px) {
             form {
                 flex-direction: column;
-                width: 70%;
+                width: 60%;
                 margin: 0px auto;
                 gap: 15px;
             }
@@ -279,6 +299,11 @@ function getFilteredEvents($pdo, $sport_name, $venue_id)
             </tbody>
         </table>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; <?= date('Y'); ?> Arbër Islamaj. All rights reserved.</p>
+    </footer>
 
 </body>
 
