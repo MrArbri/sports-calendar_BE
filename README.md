@@ -4,12 +4,18 @@
 
 The Sports Calendar Web Application is a platform that allows users to manage sports events. It enables users to add events, view a list of upcoming events, and select teams, sports, and venues. The application provides a simple interface for users to interact with the data, and all changes are stored in a MySQL database.
 
-Key features of the application:
+## Key features of the application:
 
 - Add and manage sports events
 - View upcoming events with details such as sport, teams, venue, and date/time
 - Create teams automatically if they don't exist when adding an event
 - Responsive design for both large and small screens
+
+## Database Model
+
+You can view the ERD (Entity Relationship Diagram) for the database schema in the following PDF:
+
+[Download ERD PDF](./ERD.pdf)
 
 ## Setup and Running the Application
 
